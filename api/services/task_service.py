@@ -14,3 +14,9 @@ def get_tasks():
 def get_task_by_id(id):
   task = task_model.Task.query.filter_by(id=id).first()
   return task
+
+def update_task(task, new_task):
+  task.title = new_task.title
+  task.description = new_task.description
+  task.expiration_date = new_task.expiration_date
+  db.session.commit()

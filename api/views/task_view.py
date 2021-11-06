@@ -37,6 +37,23 @@ class TaskDetail(Resource):
     ts = task_schema.TaskSchema()
     return make_response(ts.jsonify(task), 200)
 
+  def put(self, id):
+    db_task = task_service.get_task_by_id(id)
+    if db_task is None:
+      return make_response(jsonify("Task not found"), 404)
+    ts = task_schema.TaskSchema()
+    validate = ts.validate(request.json)
+    if validate:
+      return make_response(jsonify(validate), 400)
+    else:
+      title = request.json["title"]
+      description = request.json["description"]
+      expiration_date = request.json["expiration_date"]
+      new_task = task.Task(title=title, description=description, expiration_date=expiration_date)
+      task_service.update_task(db_task, new_task)
+      updated_task = task_service.get_task_by_id(id)
+      return make_response(ts.jsonify(updated_task), 201)
+
 # adicionando recurso à api, nessa rota
 api.add_resource(TaskList, '/tasks')
 api.add_resource(TaskDetail, '/tasks/<int:id>')
