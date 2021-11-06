@@ -5,7 +5,7 @@
 
 <h3>Funcionalidades</h3>
 <p>:heavy_check_mark: Cadastrar, alterar, listar e remover tarefas</p>
-<p>:hourglass_flowing_sand: Cadastrar, alterar, listar e remover projetos</p>
+<p>:heavy_check_mark: Cadastrar, alterar, listar e remover projetos</p>
 <p>:hourglass_flowing_sand: Cadastrar, alterar, listar e remover funcionários</p>
 
 <h3>Tecnologias e Ferramentas</h3>

@@ -12,5 +12,5 @@ migrate = Migrate(app, db)
 
 api = Api(app)
 
-from .views import task_view
-from .models import task_model
+from .views import task_view, project_view
+from .models import task_model, project_model
