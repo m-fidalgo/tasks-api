@@ -2,7 +2,7 @@ from ..models import task_model
 from api import db
 
 def insert_task(task):
-  db_task = task_model.Task(title=task.title, description=task.description, expiration_date=task.expiration_date)
+  db_task = task_model.Task(title=task.title, description=task.description, expiration_date=task.expiration_date, project=task.project)
   db.session.add(db_task)
   db.session.commit()
   return db_task
@@ -19,6 +19,7 @@ def update_task(task, new_task):
   task.title = new_task.title
   task.description = new_task.description
   task.expiration_date = new_task.expiration_date
+  task.project = new_task.project
   db.session.commit()
 
 def delete_task(task):

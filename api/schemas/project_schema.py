@@ -6,7 +6,7 @@ from marshmallow import fields
 class ProjectSchema(ma.ModelSchema):
   class Meta:
     model = project_model.Project
-    fields = ("id", "name", "description")
+    fields = ("id", "name", "description", "tasks")
 
   name = fields.String(required=True)
   description = fields.String(required=True)
