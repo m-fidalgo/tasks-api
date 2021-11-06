@@ -4,13 +4,15 @@ from flask import request, make_response, jsonify
 from ..schemas import project_schema
 from ..entities import project
 from ..services import project_service
+from ..pagination import paginate
+from ..models import project_model
 
 # List: métodos que não precisam de param pra funcionar
 class ProjectList(Resource):
   def get(self):
-    projects = project_service.get_projects()
+    #projects = project_service.get_projects()
     ps = project_schema.ProjectSchema(many=True)
-    return make_response(ps.jsonify(projects), 200)
+    return paginate(project_model.Project, ps)
 
   def post(self):
     ps = project_schema.ProjectSchema()

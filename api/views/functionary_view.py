@@ -5,12 +5,15 @@ from flask import request, make_response, jsonify
 from ..schemas import functionary_schema
 from ..entities import functionary
 from ..services import functionary_service
+from ..pagination import paginate
+from ..models import functionary_model
 
 class FunctionaryList(Resource):
   def get(self):
-    funcs = functionary_service.get_funcs()
+    #funcs = functionary_service.get_funcs()
     fs = functionary_schema.FunctionarySchema(many=True)
-    return make_response(fs.jsonify(funcs), 200)
+    return paginate(functionary_model.Functionary, fs)
+    #make_response(fs.jsonify(funcs), 200)
 
   def post(self):
     fs = functionary_schema.FunctionarySchema()
