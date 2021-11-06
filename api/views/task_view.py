@@ -4,13 +4,14 @@ from flask import request, make_response, jsonify
 from ..schemas import task_schema
 from ..entities import task
 from ..services import task_service, project_service
+from ..pagination import paginate
+from ..models import task_model
 
 # List: métodos que não precisam de param pra funcionar
 class TaskList(Resource):
   def get(self):
-    tasks = task_service.get_tasks()
     ts = task_schema.TaskSchema(many=True)
-    return make_response(ts.jsonify(tasks), 200)
+    return paginate(task_model.Task, ts)
 
   def post(self):
     ts = task_schema.TaskSchema()
