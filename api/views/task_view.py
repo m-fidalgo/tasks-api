@@ -54,6 +54,13 @@ class TaskDetail(Resource):
       updated_task = task_service.get_task_by_id(id)
       return make_response(ts.jsonify(updated_task), 201)
 
+  def delete(self, id):
+    task = task_service.get_task_by_id(id)
+    if task is None:
+      return make_response(jsonify("Task not found"), 404)
+    task_service.delete_task(task)
+    return make_response('', 204)
+
 # adicionando recurso à api, nessa rota
 api.add_resource(TaskList, '/tasks')
 api.add_resource(TaskDetail, '/tasks/<int:id>')

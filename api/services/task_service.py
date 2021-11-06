@@ -20,3 +20,7 @@ def update_task(task, new_task):
   task.description = new_task.description
   task.expiration_date = new_task.expiration_date
   db.session.commit()
+
+def delete_task(task):
+  db.session.delete(task)
+  db.session.commit()

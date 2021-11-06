@@ -4,7 +4,7 @@
 <p>API REST desenvolvida em Flask para gerenciamento de tarefas, em que as tarefas são relacionadas a projetos e estes a funcionários</p>
 
 <h3>Funcionalidades</h3>
-<p>:hourglass_flowing_sand: Cadastrar, alterar, listar e remover tarefas</p>
+<p>:heavy_check_mark: Cadastrar, alterar, listar e remover tarefas</p>
 <p>:hourglass_flowing_sand: Cadastrar, alterar, listar e remover projetos</p>
 <p>:hourglass_flowing_sand: Cadastrar, alterar, listar e remover funcionários</p>
 
