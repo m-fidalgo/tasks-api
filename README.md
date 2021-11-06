@@ -7,7 +7,7 @@
 <p>:heavy_check_mark: Cadastrar, alterar, listar e remover tarefas</p>
 <p>:heavy_check_mark: Cadastrar, alterar, listar e remover projetos</p>
 <p>:heavy_check_mark: Cadastrar, alterar, listar e remover funcionários</p>
-<p>:hourglass_flowing_sand: Cadastro e autenticação de usuários</p>
+<p>:heavy_check_mark: Cadastro e autenticação de usuários</p>
 
 <h3>Tecnologias e Ferramentas</h3>
 <li>Python</li>
