@@ -6,3 +6,11 @@ def insert_task(task):
   db.session.add(db_task)
   db.session.commit()
   return db_task
+
+def get_tasks():
+  tasks = task_model.Task.query.all()
+  return tasks
+
+def get_task_by_id(id):
+  task = task_model.Task.query.filter_by(id=id).first()
+  return task
