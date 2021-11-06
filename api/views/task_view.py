@@ -1,6 +1,7 @@
 from api import api
 from flask_restful import Resource
 from flask import request, make_response, jsonify
+from flask_jwt_extended import jwt_required
 from ..schemas import task_schema
 from ..entities import task
 from ..services import task_service, project_service
@@ -9,6 +10,7 @@ from ..models import task_model
 
 # List: métodos que não precisam de param pra funcionar
 class TaskList(Resource):
+  @jwt_required
   def get(self):
     ts = task_schema.TaskSchema(many=True)
     return paginate(task_model.Task, ts)
