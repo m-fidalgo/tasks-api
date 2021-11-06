@@ -6,7 +6,7 @@
 <h3>Funcionalidades</h3>
 <p>:heavy_check_mark: Cadastrar, alterar, listar e remover tarefas</p>
 <p>:heavy_check_mark: Cadastrar, alterar, listar e remover projetos</p>
-<p>:hourglass_flowing_sand: Cadastrar, alterar, listar e remover funcionários</p>
+<p>:heavy_check_mark: Cadastrar, alterar, listar e remover funcionários</p>
 
 <h3>Tecnologias e Ferramentas</h3>
 <li>Python</li>

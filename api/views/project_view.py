@@ -20,7 +20,8 @@ class ProjectList(Resource):
     else:
       name = request.json["name"]
       description = request.json["description"]
-      new_project = project.Project(name=name, description=description)
+      funcs = request.json["functionaries"]
+      new_project = project.Project(name=name, description=description, functionaries=funcs)
       result = project_service.insert_project(new_project)
       return make_response(ps.jsonify(result), 201)
 
@@ -44,7 +45,8 @@ class ProjectDetail(Resource):
     else:
       name = request.json["name"]
       description = request.json["description"]
-      new_project = project.Project(name=name, description=description)
+      funcs = request.json["functionaries"]
+      new_project = project.Project(name=name, description=description, functionaries=funcs)
       project_service.update_project(db_project, new_project)
       updated_project = project_service.get_project_by_id(id)
       return make_response(ps.jsonify(updated_project), 201)

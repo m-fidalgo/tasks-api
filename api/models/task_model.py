@@ -1,6 +1,6 @@
 from sqlalchemy.orm import backref
 from api import db
-from ..models import project_model
+from .project_model import Project
 
 class Task(db.Model):
   __tablename__ = "task"
@@ -11,4 +11,4 @@ class Task(db.Model):
   expiration_date = db.Column(db.Date, nullable=False)
 
   project_id = db.Column(db.Integer, db.ForeignKey("project.id"))
-  project = db.relationship(project_model.Project, backref=db.backref("tasks", lazy="dynamic"))
+  project = db.relationship(Project, backref=db.backref("tasks", lazy="dynamic"))

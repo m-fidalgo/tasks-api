@@ -6,3 +6,5 @@ class Functionary(db.Model):
   id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
   name = db.Column(db.String(50), nullable=False)
   age = db.Column(db.Integer, nullable=False)
+
+  projects = db.relationship("Project", secondary="func_project", back_populates="functionaries")
