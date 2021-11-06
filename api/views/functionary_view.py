@@ -1,6 +1,7 @@
 from api import api
 from flask_restful import Resource
 from flask import request, make_response, jsonify
+from flask_jwt_extended import jwt_required
 from ..schemas import functionary_schema
 from ..entities import functionary
 from ..services import functionary_service
@@ -14,6 +15,7 @@ class FunctionaryList(Resource):
     return paginate(functionary_model.Functionary, fs)
     #make_response(fs.jsonify(funcs), 200)
 
+  @jwt_required
   def post(self):
     fs = functionary_schema.FunctionarySchema()
     validate = fs.validate(request.json)
@@ -34,6 +36,7 @@ class FunctionaryDetail(Resource):
     fs = functionary_schema.FunctionarySchema()
     return make_response(fs.jsonify(func), 201)
 
+  @jwt_required
   def put(self, id):
     func = functionary_service.get_func_by_id(id)
     if func is None:
@@ -50,6 +53,7 @@ class FunctionaryDetail(Resource):
       updated_func = functionary_service.get_func_by_id(id)
       return make_response(fs.jsonify(updated_func), 201)
 
+  @jwt_required
   def delete(self, id):
     func = functionary_service.get_func_by_id(id)
     if func is None:

@@ -1,6 +1,7 @@
 from api import api
 from flask_restful import Resource
 from flask import request, make_response, jsonify
+from flask_jwt_extended import jwt_required
 from ..schemas import project_schema
 from ..entities import project
 from ..services import project_service
@@ -14,6 +15,7 @@ class ProjectList(Resource):
     ps = project_schema.ProjectSchema(many=True)
     return paginate(project_model.Project, ps)
 
+  @jwt_required
   def post(self):
     ps = project_schema.ProjectSchema()
     validate = ps.validate(request.json)
@@ -36,6 +38,7 @@ class ProjectDetail(Resource):
     ps = project_schema.ProjectSchema()
     return make_response(ps.jsonify(project), 200)
 
+  @jwt_required
   def put(self, id):
     db_project = project_service.get_project_by_id(id)
     if db_project is None:
@@ -53,6 +56,7 @@ class ProjectDetail(Resource):
       updated_project = project_service.get_project_by_id(id)
       return make_response(ps.jsonify(updated_project), 201)
 
+  @jwt_required
   def delete(self, id):
     project = project_service.get_project_by_id(id)
     if project is None:

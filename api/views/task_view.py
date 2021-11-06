@@ -10,11 +10,11 @@ from ..models import task_model
 
 # List: métodos que não precisam de param pra funcionar
 class TaskList(Resource):
-  @jwt_required
   def get(self):
     ts = task_schema.TaskSchema(many=True)
     return paginate(task_model.Task, ts)
 
+  @jwt_required
   def post(self):
     ts = task_schema.TaskSchema()
     validate = ts.validate(request.json)
@@ -45,6 +45,7 @@ class TaskDetail(Resource):
     ts = task_schema.TaskSchema()
     return make_response(ts.jsonify(task), 200)
 
+  @jwt_required
   def put(self, id):
     db_task = task_service.get_task_by_id(id)
     if db_task is None:
@@ -68,6 +69,7 @@ class TaskDetail(Resource):
       updated_task = task_service.get_task_by_id(id)
       return make_response(ts.jsonify(updated_task), 201)
 
+  @jwt_required
   def delete(self, id):
     task = task_service.get_task_by_id(id)
     if task is None:
