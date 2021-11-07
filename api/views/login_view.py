@@ -1,12 +1,21 @@
-from api import api
 from flask_restful import Resource
 from flask import request, make_response, jsonify
 from flask_jwt_extended import create_access_token, create_refresh_token
 from datetime import timedelta
 from ..schemas import login_schema
 from ..services import user_service
+from api import api, jwt
 
 class LoginList(Resource):
+  @jwt.user_claims_loader
+  def add_claim_to_access_token(identity):
+    token_user = user_service.get_user_id(identity)
+    if token_user.is_admin:
+      roles = 'admin'
+    else:
+      roles = 'user'
+    return {'roles': roles}
+
   def post(self):
     ls = login_schema.LoginSchema()
     validate = ls.validate(request.json)

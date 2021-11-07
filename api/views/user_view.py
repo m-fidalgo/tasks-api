@@ -20,6 +20,7 @@ class UserList(Resource):
             - name
             - email
             - password
+            - is_admin
           properties:
             name:
               type: string
@@ -27,6 +28,8 @@ class UserList(Resource):
               type: string
             password:
               type: string
+            is_admin:
+              type: boolean
     responses:
       201:
         description: Usuário criado com sucesso
@@ -41,6 +44,8 @@ class UserList(Resource):
               type: string
             password:
               type: string
+            is_admin:
+              type: boolean
       400:
         description: Erro de validação
     """
@@ -52,7 +57,8 @@ class UserList(Resource):
       name = request.json["name"]
       email = request.json["email"]
       password = request.json["password"]
-      new_user = user.User(name=name, email=email, password=password)
+      is_admin = request.json["is_admin"]
+      new_user = user.User(name=name, email=email, password=password, is_admin=is_admin)
       result = user_service.insert_user(new_user)
       return make_response(us.jsonify(result), 201)
 
