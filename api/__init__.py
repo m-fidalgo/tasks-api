@@ -16,5 +16,5 @@ JWTManager(app)
 api = Api(app)
 swagger = Swagger(app)
 
-from .views import task_view, project_view, functionary_view, user_view, login_view
+from .views import task_view, project_view, functionary_view, user_view, login_view, refresh_token_view
 from .models import task_model, project_model, functionary_model, user_model
