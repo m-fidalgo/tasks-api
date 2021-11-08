@@ -1,12 +1,13 @@
 from api import api
 from flask_restful import Resource
 from flask import request, make_response, jsonify
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_claims
 from ..schemas import project_schema
 from ..entities import project
 from ..services import project_service
 from ..pagination import paginate
 from ..models import project_model
+from ..decorators import admin_required
 
 # List: métodos que não precisam de param pra funcionar
 class ProjectList(Resource):
@@ -199,7 +200,7 @@ class ProjectDetail(Resource):
       updated_project = project_service.get_project_by_id(id)
       return make_response(ps.jsonify(updated_project), 200)
 
-  @jwt_required
+  @admin_required
   def delete(self, id):
     """
     Rota responsável por excluir um projeto a partir de seu id
@@ -216,6 +217,8 @@ class ProjectDetail(Resource):
     responses:
       204:
         description: Projeto deletado com sucesso
+      403:
+        description: O usuário não tem permissão para deletar um projeto
       404:
         description: Projeto não encontrado
     """

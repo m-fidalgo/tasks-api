@@ -11,7 +11,7 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 migrate = Migrate(app, db)
-JWTManager(app)
+jwt = JWTManager(app)
 
 api = Api(app)
 swagger = Swagger(app)

@@ -1,12 +1,13 @@
 from api import api
 from flask_restful import Resource
 from flask import request, make_response, jsonify
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_claims
 from ..schemas import task_schema
 from ..entities import task
 from ..services import task_service, project_service
 from ..pagination import paginate
 from ..models import task_model
+from ..decorators import admin_required
 
 # List: métodos que não precisam de param pra funcionar
 class TaskList(Resource):
@@ -216,7 +217,7 @@ class TaskDetail(Resource):
       updated_task = task_service.get_task_by_id(id)
       return make_response(ts.jsonify(updated_task), 200)
 
-  @jwt_required
+  @admin_required
   def delete(self, id):
     """
     Rota responsável por excluir uma tarefa a partir de seu id
@@ -233,6 +234,8 @@ class TaskDetail(Resource):
     responses:
       204:
         description: Tarefa deletada com sucesso
+      403:
+        description: O usuário não tem permissão para apagar a tarefa
       404:
         description: Tarefa não encontrada
     """

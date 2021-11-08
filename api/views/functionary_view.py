@@ -1,12 +1,13 @@
 from api import api
 from flask_restful import Resource
 from flask import request, make_response, jsonify
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_claims
 from ..schemas import functionary_schema
 from ..entities import functionary
 from ..services import functionary_service
 from ..pagination import paginate
 from ..models import functionary_model
+from ..decorators import admin_required
 
 class FunctionaryList(Resource):
   def get(self):
@@ -53,7 +54,7 @@ class FunctionaryDetail(Resource):
       updated_func = functionary_service.get_func_by_id(id)
       return make_response(fs.jsonify(updated_func), 201)
 
-  @jwt_required
+  @admin_required
   def delete(self, id):
     func = functionary_service.get_func_by_id(id)
     if func is None:
