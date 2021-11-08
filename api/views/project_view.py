@@ -7,10 +7,11 @@ from ..entities import project
 from ..services import project_service
 from ..pagination import paginate
 from ..models import project_model
-from ..decorators import admin_required
+from ..decorators import admin_required, api_key_required
 
 # List: métodos que não precisam de param pra funcionar
 class ProjectList(Resource):
+  @api_key_required
   def get(self):
     """
     Rota responsável por retornar todos os projetos
@@ -98,6 +99,7 @@ class ProjectList(Resource):
 
 # Detail: métodos que recebem param
 class ProjectDetail(Resource):
+  @api_key_required
   def get(self, id):
     """
     Rota responsável por retornar um projeto com base em seu id

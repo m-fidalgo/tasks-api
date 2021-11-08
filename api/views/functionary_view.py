@@ -7,9 +7,10 @@ from ..entities import functionary
 from ..services import functionary_service
 from ..pagination import paginate
 from ..models import functionary_model
-from ..decorators import admin_required
+from ..decorators import admin_required, api_key_required
 
 class FunctionaryList(Resource):
+  @api_key_required
   def get(self):
     #funcs = functionary_service.get_funcs()
     fs = functionary_schema.FunctionarySchema(many=True)
@@ -30,6 +31,7 @@ class FunctionaryList(Resource):
       return make_response(fs.jsonify(result), 201)
 
 class FunctionaryDetail(Resource):
+  @api_key_required
   def get(self, id):
     func = functionary_service.get_func_by_id(id)
     if func is None:

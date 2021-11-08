@@ -1,3 +1,4 @@
+import uuid
 from api import api
 from flask_restful import Resource
 from flask import request, make_response, jsonify
@@ -58,7 +59,8 @@ class UserList(Resource):
       email = request.json["email"]
       password = request.json["password"]
       is_admin = request.json["is_admin"]
-      new_user = user.User(name=name, email=email, password=password, is_admin=is_admin)
+      api_key = str(uuid.uuid4())
+      new_user = user.User(name=name, email=email, password=password, is_admin=is_admin, api_key=api_key)
       result = user_service.insert_user(new_user)
       return make_response(us.jsonify(result), 201)
 

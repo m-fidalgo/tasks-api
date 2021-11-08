@@ -10,6 +10,7 @@ class User(db.Model):
   email = db.Column(db.String(100), nullable=False, unique=True)
   password = db.Column(db.String(255), nullable=False)
   is_admin = db.Column(db.Boolean)
+  api_key = db.Column(db.String(100), nullable=True, unique=True)
   
   def gen_password(self):
     self.password = pbkdf2_sha256.hash(self.password)

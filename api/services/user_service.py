@@ -2,7 +2,7 @@ from ..models import user_model
 from api import db
 
 def insert_user(user):
-  db_user = user_model.User(name=user.name, email=user.email, password=user.password, is_admin=user.is_admin)
+  db_user = user_model.User(name=user.name, email=user.email, password=user.password, is_admin=user.is_admin, api_key=user.api_key)
   db_user.gen_password()
   db.session.add(db_user)
   db.session.commit()
@@ -13,3 +13,6 @@ def get_user_email(email):
 
 def get_user_id(id):
   return user_model.User.query.filter_by(id=id).first()
+
+def get_user_api_key(api_key):
+  return user_model.User.query.filter_by(api_key=api_key).first()

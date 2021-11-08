@@ -7,10 +7,11 @@ from ..entities import task
 from ..services import task_service, project_service
 from ..pagination import paginate
 from ..models import task_model
-from ..decorators import admin_required
+from ..decorators import admin_required, api_key_required
 
 # List: métodos que não precisam de param pra funcionar
 class TaskList(Resource):
+  @api_key_required
   def get(self):
     """
     Rota responsável por retornar todas as tarefas
@@ -107,6 +108,7 @@ class TaskList(Resource):
 
 # Detail: métodos que recebem param
 class TaskDetail(Resource):
+  @api_key_required
   def get(self, id):
     """
     Rota responsável por exibir uma tarefa a partir de seu id
