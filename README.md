@@ -10,5 +10,7 @@
 <p>:heavy_check_mark: Cadastro e autenticação de usuários</p>
 
 <h3>Tecnologias e Ferramentas</h3>
-<li>Python</li>
-<li>MySQL</li>
+
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
